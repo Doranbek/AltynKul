@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ApplicationSM> 
+
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+
+<p class=""text-left"></p>
+
+<select asp-for="">
+    <option>Choose your card</option>
+
+    @foreach (var item in Model.Se)
+    {
+        <option>@item.Title</option>
+    }
+</select>
+
+
+
