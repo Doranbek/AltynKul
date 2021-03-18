@@ -25,12 +25,14 @@ namespace Company.Controllers
         {
             var SelectDep = await db.Departments.ToListAsync();
             var SelectPos = await db.Positions.ToListAsync();
+            var SelectCamp = await db.Camps.ToListAsync();
             var SelectCat = await db.Categoryes.ToListAsync();
 
             var viewModel = new ApplicationSM
             {
                 Departments = SelectDep,
                 Positions = SelectPos,
+                Camps = SelectCamp,
                 Categoryes = SelectCat
 
             };

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ApplicationSM> 
+﻿@model ApplicationSM
 
 
 @{
@@ -6,16 +6,95 @@
 }
 
 
-<p class=""text-left"></p>
+<div class="text-left">
 
-<select asp-for="">
-    <option>Choose your card</option>
+    <h1>Регистрация заявок</h1>
+    
+    <form asp-action="Registration" asp-controller="Registration" asp-anti-forgery="true">
+        <div class="form-group">
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label">Ф.И.О сотрудника</label>
+                    <input asp-for="FullName" placeholder="Ф.И.О." />
+                    <span asp-validation-for="FullName" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Departament" class="control-label">Отдел</label>
+                    <select asp-for="Departament">
+                        <option>Выберите отдел</option>
 
-    @foreach (var item in Model.Se)
-    {
-        <option>@item.Title</option>
-    }
-</select>
+                        @foreach (var item in Model.Departments)
+                        {
+                            <option>@item.Title</option>
+                        }
+                    </select>
 
+                </div>
+                <div class="form-group">
+                    <label asp-for="Position" class="control-label">Должность</label>
+                    <select asp-for="Position">
+                        <option>Выберите должность</option>
 
+                        @foreach (var item in Model.Positions)
+                        {
+                            <option>@item.Title</option>
+                        }
 
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label">Начало</label>
+                    <input asp-for="StartDate" placeholder="StartDate" />
+                    <span asp-validation-for="StartDate" />
+                    <label asp-for="EndDate" class="control-label">Конец</label>
+                    <input asp-for="EndDate" placeholder="EndDate" />
+                    <span asp-validation-for="EndDate" />
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Camp" class="control-label">Поток</label>
+                    <select asp-for="Camp">
+                        <option>Выберите поток</option>
+
+                        @foreach (var item in Model.Camps)
+                        {
+                            <option>@item.Title</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CampersNumber" class="control-label">Количество взрослых</label>
+                    <input asp-for="CampersNumber" placeholder="CampersNumber" />
+                    <span asp-validation-for="CampersNumber" />
+                    <label asp-for="ChildNumber" class="control-label">Количество детей</label>
+                    <input asp-for="ChildNumber" placeholder="ChildNumber" />
+                    <span asp-validation-for="ChildNumber" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label">Категория номера</label>
+                    <select asp-for="Category">
+                        <option>Выберите категория номера</option>
+
+                        @foreach (var item in Model.Categoryes)
+                        {
+                            <option>@item.Title</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button>Создать</button>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+                </div>
+                <div class="validation" asp-validation-summary="All"></div>
+            </div>
+        </div>
+    </form>
+</div>

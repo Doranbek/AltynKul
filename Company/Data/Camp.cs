@@ -11,7 +11,7 @@ namespace Company.Data
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }
-        public DateTime StartdDate { get; set; }
+        public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Specification { get; set; }
     }

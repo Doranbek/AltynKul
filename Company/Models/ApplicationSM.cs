@@ -32,7 +32,7 @@ namespace Company.Models
         public Position Position { get; set; }
 
         [Display(Name = "Дата начало путевки")]
-        public DateTime? StartdDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [Display(Name = "Дата окончание путевки")]
         public DateTime? EndDate { get; set; }
@@ -40,6 +40,7 @@ namespace Company.Models
         [Display(Name = "Выбрать потока")]
         [Required(ErrorMessage = "Поток не выбран")]
         public int CampId { get; set; }
+        public Camp Camp { get; set; }
        
         [Display(Name = "Взрос­лые")]
         [Required(ErrorMessage = "Количество взрослых не указан")]
@@ -51,12 +52,17 @@ namespace Company.Models
         [Display(Name = "Выборать тип номера")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        
-        public IEnumerable<Category> Categoryes { get; set; }
-
-        public IEnumerable<Position> Positions { get; set; }
 
         public IEnumerable<Department> Departments { get; set; }
+        public IEnumerable<Position> Positions { get; set; }
+
+        public IEnumerable<Camp> Camps { get; set; }
+        public IEnumerable<Category> Categoryes { get; set; }
+
+
+       
+
+       
 
     }
 }
