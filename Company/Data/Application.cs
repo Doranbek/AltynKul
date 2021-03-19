@@ -14,7 +14,7 @@ namespace Company.Data
         public int PositionId { get; set; }
         public Position Position { get; set; }
         public int DepartmentId { get; set; }
-        public Department Departament { get; set; }
+        public Department Department { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public int CampId { get; set; }
@@ -23,6 +23,7 @@ namespace Company.Data
         public int ChildNumber { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public bool Status { get; set; }
 
     }

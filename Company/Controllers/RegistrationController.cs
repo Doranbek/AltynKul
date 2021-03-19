@@ -40,6 +40,37 @@ namespace Company.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Registration(ApplicationSM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var TempPosition = db.Positions.FirstOrDefault(u => u.Title == model.Position.Title);
+                var TempDepartment = await db.Departments.FirstOrDefaultAsync(u => u.Title == model.Department.Title);
+                var TempCamp = await db.Camps.FirstOrDefaultAsync(u => u.Title == model.Camp.Title);
+                var TempCategory = await db.Categoryes.FirstOrDefaultAsync(u => u.Title == model.Category.Title);
+
+
+                db.Applications.Add( new Application
+                {
+                    FullName = model.FullName,
+                    PositionId = TempPosition.Id,
+                    DepartmentId = TempDepartment.Id,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    CampId = TempCamp.Id,
+                    CampersNumber = model.CampersNumber,
+                    CategoryId = TempCategory.Id,
+                    Status = false,
+                    CreatedDate = DateTime.Now
+                });
+                await db.SaveChangesAsync();
+                TempData["SuccessMessage"] = $"Заявка успешно создано";
+                return RedirectToAction("Registration");
+            }
+            return View(model);
+        }
+
 
     }
 }

@@ -22,7 +22,7 @@ namespace Company.Models
         public int DepartmentId { get; set; }
         
         [ForeignKey("DepartmentId")]
-        public Department Departament { get; set; }
+        public Department Department { get; set; }
 
         [Display(Name = "Должность")]
         [Required(ErrorMessage = "Должность не заполнен")]
@@ -54,13 +54,12 @@ namespace Company.Models
         public Category Category { get; set; }
 
         public IEnumerable<Department> Departments { get; set; }
+
         public IEnumerable<Position> Positions { get; set; }
 
         public IEnumerable<Camp> Camps { get; set; }
-        public IEnumerable<Category> Categoryes { get; set; }
 
-
-       
+        public IEnumerable<Category> Categoryes { get; set; } 
 
        
 
