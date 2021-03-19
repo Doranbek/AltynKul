@@ -1,6 +1,7 @@
 ﻿using Company.Data;
 using Company.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,17 +24,43 @@ namespace Company.Controllers
 
         public async Task<IActionResult> Registration()
         {
-            var SelectDep = await db.Departments.ToListAsync();
-            var SelectPos = await db.Positions.ToListAsync();
-            var SelectCamp = await db.Camps.ToListAsync();
-            var SelectCat = await db.Categoryes.ToListAsync();
+            var selectDepartments = await db.Departments.ToListAsync();
+            var selectPositions = await db.Positions.ToListAsync();
+            var selectCamps = await db.Camps.ToListAsync();
+            var selectCategories = await db.Categoryes.ToListAsync();
+
+
+            var departmentsSelectList = new List<SelectListItem>();
+            selectPositions.ForEach(
+                p => { 
+                    departmentsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+
+            var positionsSelectList = new List<SelectListItem>();
+            selectPositions.ForEach(
+                p => {
+                    positionsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+
+            var campsSelectList = new List<SelectListItem>();
+            selectPositions.ForEach(
+                p => {
+                    campsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+
+            var categoriesSelectList = new List<SelectListItem>();
+            selectPositions.ForEach(
+                p => {
+                    categoriesSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+
 
             var viewModel = new ApplicationSM
             {
-                Departments = SelectDep,
-                Positions = SelectPos,
-                Camps = SelectCamp,
-                Categoryes = SelectCat
+                Departments = departmentsSelectList,
+                Positions = positionsSelectList,
+                Camps = campsSelectList,
+                Categories =categoriesSelectList
 
             };
 
@@ -45,27 +72,25 @@ namespace Company.Controllers
         {
             if (ModelState.IsValid)
             {
-                var TempPosition = db.Positions.FirstOrDefault(u => u.Title == model.Position.Title);
-                var TempDepartment = await db.Departments.FirstOrDefaultAsync(u => u.Title == model.Department.Title);
-                var TempCamp = await db.Camps.FirstOrDefaultAsync(u => u.Title == model.Camp.Title);
-                var TempCategory = await db.Categoryes.FirstOrDefaultAsync(u => u.Title == model.Category.Title);
-
-
                 db.Applications.Add( new Application
                 {
                     FullName = model.FullName,
-                    PositionId = TempPosition.Id,
-                    DepartmentId = TempDepartment.Id,
+                    PositionId = model.PositionId,
+                    DepartmentId = model.DepartmentId,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    CampId = TempCamp.Id,
+                    CampId = model.CampId,
                     CampersNumber = model.CampersNumber,
-                    CategoryId = TempCategory.Id,
+                    CategoryId = model.CategoryId,
                     Status = false,
                     CreatedDate = DateTime.Now
                 });
-                await db.SaveChangesAsync();
-                TempData["SuccessMessage"] = $"Заявка успешно создано";
+                var retValue = await db.SaveChangesAsync();
+                if (retValue > 0)
+                    TempData["SuccessMessage"] = $"Заявка успешно создано";
+                else
+                    TempData["ErrofrMessage"] = "Произошла ошибка";
+
                 return RedirectToAction("Registration");
             }
             return View(model);
