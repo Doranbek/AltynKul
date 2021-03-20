@@ -31,7 +31,7 @@ namespace Company.Controllers
 
 
             var departmentsSelectList = new List<SelectListItem>();
-            selectPositions.ForEach(
+            selectDepartments.ForEach(
                 p => { 
                     departmentsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
                 });
@@ -43,13 +43,13 @@ namespace Company.Controllers
                 });
 
             var campsSelectList = new List<SelectListItem>();
-            selectPositions.ForEach(
+            selectCamps.ForEach(
                 p => {
                     campsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
                 });
 
             var categoriesSelectList = new List<SelectListItem>();
-            selectPositions.ForEach(
+            selectCategories.ForEach(
                 p => {
                     categoriesSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
                 });
@@ -81,6 +81,7 @@ namespace Company.Controllers
                     EndDate = model.EndDate,
                     CampId = model.CampId,
                     CampersNumber = model.CampersNumber,
+                    ChildNumber = model.ChildNumber,
                     CategoryId = model.CategoryId,
                     Status = false,
                     CreatedDate = DateTime.Now
