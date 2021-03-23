@@ -97,6 +97,12 @@ namespace Company.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> RegistrationList()
+        {
+            var applications = await db.ViewApplications.ToListAsync();
+            return View(applications);
+        }
+
 
     }
 }

@@ -13,6 +13,7 @@ namespace Company.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Category> Categoryes { get; set; }
         public DbSet<Camp> Camps { get; set; }
+        public DbSet<ViewApplication> ViewApplications { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

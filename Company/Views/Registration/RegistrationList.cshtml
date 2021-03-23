@@ -1,0 +1,87 @@
+﻿@using Company.Data
+@model List<ViewApplication>
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ф.И.О
+            </th>
+            <th>
+                Отдел
+            </th>
+            <th>
+                Должность
+            </th>
+            <th>
+                Тип номера
+            </th>
+            <th>
+                Поток
+            </th>
+            <th>
+                Заезд
+            </th>
+            <th>
+                Выезд
+            </th>
+            <th>
+                Взрослые
+            </th>
+            <th>
+                Дети
+            </th>
+            <th>
+                Дата подачи
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in @Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositionTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CampTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CampersNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate) 
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
