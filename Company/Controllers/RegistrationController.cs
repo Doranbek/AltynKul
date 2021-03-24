@@ -23,7 +23,7 @@ namespace Company.Controllers
         }
 
         public async Task<IActionResult> Registration()
-        {
+        {            
             var selectDepartments = await db.Departments.ToListAsync();
             var selectPositions = await db.Positions.ToListAsync();
             var selectCamps = await db.Camps.ToListAsync();
