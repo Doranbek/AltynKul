@@ -99,8 +99,8 @@ namespace Company.Controllers
 
         public async Task<IActionResult> RegistrationList()
         {
-            var applications = await db.ViewApplications.ToListAsync();
-            return View(applications);
+            var applicationList = await db.ViewApplications.ToListAsync();
+            return View(applicationList);
         }
 
 

@@ -38,6 +38,9 @@ namespace Company.Data.Migrations
                     b.Property<int>("ChildNumber")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
@@ -47,7 +50,10 @@ namespace Company.Data.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartdDate")
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Status")
@@ -60,6 +66,8 @@ namespace Company.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PositionId");
 
                     b.ToTable("Applications");
                 });
@@ -77,7 +85,7 @@ namespace Company.Data.Migrations
                     b.Property<string>("Specification")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartdDate")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -85,7 +93,7 @@ namespace Company.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Camp");
+                    b.ToTable("Camps");
                 });
 
             modelBuilder.Entity("Company.Data.Category", b =>
@@ -103,7 +111,7 @@ namespace Company.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categoryes");
                 });
 
             modelBuilder.Entity("Company.Data.Department", b =>
@@ -121,7 +129,70 @@ namespace Company.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("Company.Data.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Specification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("Company.Data.ViewApplication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("CampTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CampersNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CategoryTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChildNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartmentTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ViewApplications");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -338,9 +409,15 @@ namespace Company.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Company.Data.Department", "Departament")
+                    b.HasOne("Company.Data.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Company.Data.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -348,7 +425,9 @@ namespace Company.Data.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Departament");
+                    b.Navigation("Department");
+
+                    b.Navigation("Position");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
