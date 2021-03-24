@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Company.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Company.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Category> Categoryes { get; set; }
         public DbSet<Camp> Camps { get; set; }
+        public DbSet<ViewApplication> ViewApplications { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

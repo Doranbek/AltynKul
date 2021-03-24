@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Company.Models.ViewApplication>
+
+@{
+    ViewData["Title"] = "SortList";
+}
+
+<h1>SortList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PositionTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CampTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CampersNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChildNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            
+           </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositionTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CampTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CampersNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>
