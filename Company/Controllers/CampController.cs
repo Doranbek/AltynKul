@@ -97,7 +97,7 @@ namespace Company.Controllers
         }
 
         // GET: CampController/Delete/5
-        public async Task<ActionResult> DeleteAsync(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
 
             if (id == null)
@@ -117,10 +117,10 @@ namespace Company.Controllers
         // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteAsync(int id, Camp camp)
+        public async Task<ActionResult> Delete(int id)
         {
             var DelCamp = await db.Camps.FindAsync(id);
-            db.Camps.Remove(camp);
+            db.Camps.Remove(DelCamp);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
