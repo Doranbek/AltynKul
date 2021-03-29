@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Company.Data.Camp>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список потоков</h1>
+
+<p>
+    <a asp-action="Create">Добавить новый поток</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Потоки
+            </th>
+            <th>
+                Начало потока
+            </th>
+            <th>
+                Конец потока
+            </th>
+            <th>
+                Описание
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specification)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

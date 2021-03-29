@@ -18,6 +18,7 @@ namespace Company.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }
+        }       
+        public DbSet<Company.Models.CampVM> CampVM { get; set; }
     }
 }
