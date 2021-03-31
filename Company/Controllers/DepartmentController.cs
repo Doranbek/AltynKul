@@ -11,21 +11,20 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    public class CampController : Controller
+    public class DepartmentController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
         protected readonly ApplicationDbContext db;
 
-        public CampController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public DepartmentController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             this.db = db;
         }
-        // GET: CampController
-        public async Task<ActionResult> Index()
+        // GET: DepartmentController
+        public async Task<IActionResult> Index()
         {
-            var list = await db.Camps.ToListAsync();
-          
+            var list = await db.Departments.ToListAsync();
 
             return View(list);
         }
@@ -39,21 +38,19 @@ namespace Company.Controllers
         // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CampVM model)
+        public async Task<IActionResult> Create(DepartmentVM model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            
-            var Camp = new Camp
+
+            var Department = new Department
             {
-                
-                Title = model.Title,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
+
+                Title = model.Title,                
                 Specification = model.Specification
             };
 
-            db.Add(Camp);
+            db.Add(Department);
 
             await db.SaveChangesAsync();
 
@@ -68,21 +65,21 @@ namespace Company.Controllers
                 return NotFound();
             }
 
-            var camp = await db.Camps.FindAsync(id);
-            if (camp == null)
+            var department = await db.Departments.FindAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            return View(camp);
+            return View(department);
         }
 
         // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, Camp camp)
+        public async Task<ActionResult> Edit(int id, Department department)
         {
 
-            if (id != camp.Id)
+            if (id != department.Id)
             {
                 return NotFound();
             }
@@ -91,18 +88,18 @@ namespace Company.Controllers
             {
                 try
                 {
-                    db.Update(camp);
+                    db.Update(department);
                     await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     return NotFound();
                 }
-                              
-                
+
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(camp);
+            return View(department);
         }
 
         // GET: CampController/Delete/5
@@ -114,13 +111,13 @@ namespace Company.Controllers
                 return NotFound();
             }
 
-            var camp = await db.Camps.FirstOrDefaultAsync(m => m.Id == id);
-            if (camp == null)
+            var department = await db.Departments.FirstOrDefaultAsync(m => m.Id == id);
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(camp);
+            return View(department);
         }
 
         // POST: CampController/Delete/5
@@ -128,8 +125,8 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
         {
-            var DelCamp = await db.Camps.FindAsync(id);
-            db.Camps.Remove(DelCamp);
+            var Deldepartment = await db.Departments.FindAsync(id);
+            db.Departments.Remove(Deldepartment);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
