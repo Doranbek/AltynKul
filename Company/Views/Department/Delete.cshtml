@@ -1,32 +1,19 @@
-﻿@model Company.Data.Camp
+﻿@model Company.Data.Department
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Удаление потока</h1>
 
+<h3>Удаление отдела</h3>
 <div>
     
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Поток
-        </dt>
+            Отдел
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            Начало потока
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            Конец потока
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt class = "col-sm-2">
             Описание
@@ -38,7 +25,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалит" class="btn btn-danger" /> |
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
         <a asp-action="Index">Назад</a>
     </form>
 </div>
