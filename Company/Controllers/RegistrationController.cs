@@ -27,7 +27,7 @@ namespace Company.Controllers
             var selectDepartments = await db.Departments.ToListAsync();
             var selectPositions = await db.Positions.ToListAsync();
             var selectCamps = await db.Camps.ToListAsync();
-            var selectCategories = await db.Categoryes.ToListAsync();
+            var selectCategories = await db.Categories.ToListAsync();
 
 
             var departmentsSelectList = new List<SelectListItem>();

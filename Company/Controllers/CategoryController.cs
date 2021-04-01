@@ -1,4 +1,5 @@
 ﻿using Company.Data;
+using Company.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,81 +21,114 @@ namespace Company.Controllers
             _logger = logger;
             this.db = db;
         }
-        // GET: CategoryController
-        public async Task<ActionResult> Index()
+        // GET: DepartmentController
+        public async Task<IActionResult> Index()
         {
-            var list = await db.Categoryes.ToListAsync();
+            var list = await db.Categories.ToListAsync();
 
             return View(list);
         }
 
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CategoryController/Create
+        // GET: CampController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoryController/Create
+        // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(CategoryVM model)
         {
-            try
+            if (!ModelState.IsValid) return View(model);
+
+
+            var Category = new Category
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+                Title = model.Title,
+                Specification = model.Specification
+            };
+
+            db.Add(Category);
+
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: CampController/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await db.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
         }
 
-        // POST: CategoryController/Edit/5
+        // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, Category category)
         {
-            try
+
+            if (id != category.Id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Update(category);
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(category);
         }
 
-        // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: CampController/Delete/5
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await db.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
         }
 
-        // POST: CategoryController/Delete/5
+        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var Delcategory = await db.Categories.FindAsync(id);
+            db.Categories.Remove(Delcategory);
+            await db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
