@@ -21,5 +21,6 @@ namespace Company.Data
         }       
         public DbSet<Company.Models.CampVM> CampVM { get; set; }
         public DbSet<Company.Models.DepartmentVM> DepartmentVM { get; set; }
+        public DbSet<Company.Models.PositionVM> PositionVM { get; set; }
     }
 }
