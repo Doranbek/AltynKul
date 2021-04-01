@@ -12,7 +12,7 @@ namespace Company.Data
         public DbSet<Application> Applications { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<Category> Categoryes { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Camp> Camps { get; set; }
         public DbSet<ViewApplication> ViewApplications { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -22,5 +22,6 @@ namespace Company.Data
         public DbSet<Company.Models.CampVM> CampVM { get; set; }
         public DbSet<Company.Models.DepartmentVM> DepartmentVM { get; set; }
         public DbSet<Company.Models.PositionVM> PositionVM { get; set; }
+        public DbSet<Company.Models.CategoryVM> CategoryVM { get; set; }
     }
 }
