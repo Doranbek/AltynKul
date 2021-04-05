@@ -47,7 +47,16 @@ namespace Company.Controllers
             {
 
                 Title = model.Title,
-                Specification = model.Specification
+                Specification = model.Specification,
+                Camp1 = model.Camp1,
+                Camp2 = model.Camp2,
+                Camp3 = model.Camp3,
+                Camp4 = model.Camp4,
+                Camp5 = model.Camp5,
+                Camp6 = model.Camp6,
+                Camp7 = model.Camp7,
+                Camp8 = model.Camp8,
+                Camp9 = model.Camp9
             };
 
             db.Add(Category);
