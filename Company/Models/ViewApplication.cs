@@ -14,9 +14,9 @@ namespace Company.Models
         [Display(Name = "Ф.И.О")]
         public string FullName { get; set; }
         [Display(Name = "Должност")]
-        public string PositionTitle { get; set; }
+        public string Position { get; set; }
         [Display(Name = "Отдел")]
-        public string DepartmentTitle { get; set; }
+        public string Department { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Заезд")]
         public DateTime? StartDate { get; set; }
@@ -24,13 +24,13 @@ namespace Company.Models
         [Display(Name = "Выезд")]
         public DateTime? EndDate { get; set; }
         [Display(Name = "Поток")]
-        public string CampTitle { get; set; }
+        public string Camp { get; set; }
         [Display(Name = "Взрослые")]
         public int CampersNumber { get; set; }
         [Display(Name = "Дети")]
         public int ChildNumber { get; set; }
         [Display(Name = "Категория")]
-        public string CategoryTitle { get; set; }
+        public string Category { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Дата подачи")]
         public DateTime? CreatedDate { get; set; }
