@@ -15,6 +15,7 @@ namespace Company.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Camp> Camps { get; set; }
         public DbSet<ViewApplication> ViewApplications { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -23,5 +24,6 @@ namespace Company.Data
         public DbSet<Company.Models.DepartmentVM> DepartmentVM { get; set; }
         public DbSet<Company.Models.PositionVM> PositionVM { get; set; }
         public DbSet<Company.Models.CategoryVM> CategoryVM { get; set; }
+        public DbSet<Company.Models.RoomVM> RoomVM { get; set; }
     }
 }
