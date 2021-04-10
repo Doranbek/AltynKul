@@ -20,12 +20,6 @@ namespace Company.Models
         [Required(ErrorMessage = "Должность не заполнен")]
         public int PositionId { get; set; }
 
-        [Display(Name = "Дата начало путевки")]
-        public DateTime? StartDate { get; set; }
-
-        [Display(Name = "Дата окончание путевки")]
-        public DateTime? EndDate { get; set; }
-
         [Display(Name = "Выбрать потока")]
         [Required(ErrorMessage = "Поток не выбран")]
         public int CampId { get; set; }
@@ -33,9 +27,6 @@ namespace Company.Models
         [Display(Name = "Взрос­лые")]
         [Required(ErrorMessage = "Количество взрослых не указан")]
         public int CampersNumber { get; set; }
-
-        [Display(Name = "Дети")]
-        public int ChildNumber { get; set; }
 
         [Display(Name = "Выборать тип номера")]
         public int CategoryId { get; set; }
@@ -47,9 +38,7 @@ namespace Company.Models
 
         public IEnumerable<SelectListItem> Camps { get; set; }
 
-        public IEnumerable<SelectListItem> Categories { get; set; } 
-
-       
+        public IEnumerable<SelectListItem> Categories { get; set; }        
 
     }
 }
