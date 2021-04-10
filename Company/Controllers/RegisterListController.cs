@@ -29,7 +29,21 @@ namespace Company.Controllers
             var modelSortList = await db.ViewApplications.Where(x => x.Status == true).ToListAsync();
             return View(modelSortList);
         }
+        public async Task<IActionResult> Reserv(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var AppModel = await db.ViewApplications.FindAsync(id);
 
+            if (AppModel == null)
+            {
+                return NotFound();
+            }
+            
+            return  View(AppModel);
+        }
     }
 }

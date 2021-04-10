@@ -17,18 +17,11 @@ namespace Company.Models
         public string Position { get; set; }
         [Display(Name = "Отдел")]
         public string Department { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Заезд")]
-        public DateTime? StartDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Выезд")]
-        public DateTime? EndDate { get; set; }
+
         [Display(Name = "Поток")]
         public string Camp { get; set; }
-        [Display(Name = "Взрослые")]
+        [Display(Name = "Количество отдыхающих")]
         public int CampersNumber { get; set; }
-        [Display(Name = "Дети")]
-        public int ChildNumber { get; set; }
         [Display(Name = "Категория")]
         public string Category { get; set; }
         [DataType(DataType.Date)]

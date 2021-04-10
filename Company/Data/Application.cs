@@ -15,12 +15,9 @@ namespace Company.Data
         public Position Position { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
         public int CampId { get; set; }
         public Camp Camp { get; set; }
         public int CampersNumber { get; set; }
-        public int ChildNumber { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public DateTime? CreatedDate { get; set; }

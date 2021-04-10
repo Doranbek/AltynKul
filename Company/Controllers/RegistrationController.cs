@@ -77,11 +77,8 @@ namespace Company.Controllers
                     FullName = model.FullName,
                     PositionId = model.PositionId,
                     DepartmentId = model.DepartmentId,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
                     CampId = model.CampId,
                     CampersNumber = model.CampersNumber,
-                    ChildNumber = model.ChildNumber,
                     CategoryId = model.CategoryId,
                     Status = false,
                     CreatedDate = DateTime.Now
