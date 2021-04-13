@@ -17,10 +17,12 @@ namespace Company.Data
         public DbSet<ViewApplication> ViewApplications { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet <Voucher> Vouchers { get; set; }
+        public DbSet<ViewVoucher> ViewVouchers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }       
+       
  
     }
 }

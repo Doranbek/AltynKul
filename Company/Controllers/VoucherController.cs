@@ -25,10 +25,18 @@ namespace Company.Controllers
 
         public async Task<IActionResult> Book(int id)
         {
-                  
-
             var AppModel = await db.Applications.FindAsync(id);
+            var checkRoom = await db.Vouchers
+                .FirstOrDefaultAsync(c => c.CampId == AppModel.CampId && c.CategoryId == AppModel.CategoryId);
 
+            var selectRooms = await db.Rooms
+                .Where(c => c.CategoryId == AppModel.CategoryId /*&& c.Id != checkRoom.RoomId*/).ToListAsync();
+
+            var roomsSelectList = new List<SelectListItem>();
+            selectRooms.ForEach(
+                p => {
+                    roomsSelectList.Add(new SelectListItem() { Text = p.RoomNumber.ToString(), Value = p.Id.ToString() });
+                });
             if (AppModel == null)
             {
                 return NotFound();
@@ -39,6 +47,8 @@ namespace Company.Controllers
                
                 FullName = AppModel.FullName,               
                 CampId = AppModel.CampId,
+                CategoryId = AppModel.CategoryId,
+                Rooms = roomsSelectList,
                 ApplicationId = id
             };
 
@@ -46,43 +56,47 @@ namespace Company.Controllers
         }
 
         // GET: VoucherController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var modelList = await db.ViewVouchers.ToListAsync();
+            return View(modelList);
         }
-             
 
-        // GET: VoucherController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+
+        //// GET: VoucherController/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: VoucherController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Create(VoucherVM model)
+        public async Task <IActionResult> Book(VoucherVM model)
         {
             if (ModelState.IsValid)
             {
+                var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == model.RoomId);
+                //string campt = "Camp" + model.CategoryId;
+                //var cat = await db.Categories.FirstOrDefaultAsync(c => c.Id == model.CategoryId);
                
                 db.Vouchers.Add(new Voucher
                 {
-                    FullName = model.FullName,                   
-                    Price = 1,// 10 дней * количество мест в комнате * цена потока (Categories Camp +CampId) cost
-                    Reserved = model.Reserved,
-                    PayStatus = model.PayStatus,
+                    FullName = model.FullName, 
+                    CampId = model.CampId,
+                    CategoryId = model.CategoryId,
+                    RoomId = model.RoomId,
+                    Cost = 10 * room.Amount,// 10 дней * количество мест в комнате * цена потока (Categories Camp +CampId) cost
+                    Reserved = true,
+                    PayStatus = true,
                     ApplicationId = model.ApplicationId,
                     CreatedDate = DateTime.Now
 
                 });
-                var retValue = await db.SaveChangesAsync();
-                if (retValue > 0)
-                    TempData["SuccessMessage"] = $"Заявка успешно создано";
-                else
-                    TempData["ErrofrMessage"] = "Произошла ошибка";
+                  await db.SaveChangesAsync();
+                //var AppModel = await db.Applications.FindAsync(model.ApplicationId);
 
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
             return View(model);
         }
