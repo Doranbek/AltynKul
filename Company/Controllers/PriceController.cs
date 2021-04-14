@@ -1,7 +1,7 @@
 ﻿using Company.Data;
 using Company.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,46 +11,70 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    public class CategoryController : Controller
+    public class PriceController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
         protected readonly ApplicationDbContext db;
 
-        public CategoryController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public PriceController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             this.db = db;
         }
-        // GET: DepartmentController
+        // GET: HomeController1
         public async Task<IActionResult> Index()
         {
-            var list = await db.Categories.ToListAsync();
+            var list = await db.ViewCampCategories.ToListAsync();
 
             return View(list);
         }
 
+
         // GET: CampController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var selectCamps = await db.Camps.ToListAsync();
+            var selectCategories = await db.Categories.ToListAsync();
+
+            var campsSelectList = new List<SelectListItem>();
+            selectCamps.ForEach(
+                p =>
+                {
+                    campsSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+
+            var categoriesSelectList = new List<SelectListItem>();
+            selectCategories.ForEach(
+                p =>
+                {
+                    categoriesSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+                });
+            var viewModel = new CampCategoryVM
+            {
+                Camps = campsSelectList,
+                Categories = categoriesSelectList
+            };
+
+            return View(viewModel);
         }
 
         // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CategoryVM model)
+        public async Task<IActionResult> Create(CampCategoryVM model)
         {
             if (!ModelState.IsValid) return View(model);
 
 
-            var Category = new Category
+            var price = new CampCategory
             {
 
-                Title = model.Title,
-                Specification = model.Specification
+                CampId = model.CampId,
+                CategoryId = model.CategoryId,
+                Price = model.Price
             };
 
-            db.Add(Category);
+            db.Add(price);
 
             await db.SaveChangesAsync();
 
@@ -65,21 +89,21 @@ namespace Company.Controllers
                 return NotFound();
             }
 
-            var category = await db.Categories.FindAsync(id);
-            if (category == null)
+            var camp = await db.CampCategories.FindAsync(id);
+            if (camp == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(camp);
         }
 
         // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, Category category)
+        public async Task<ActionResult> Edit(int id, CampCategory model)
         {
 
-            if (id != category.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
@@ -88,7 +112,7 @@ namespace Company.Controllers
             {
                 try
                 {
-                    db.Update(category);
+                    db.Update(model);
                     await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -99,7 +123,7 @@ namespace Company.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(model);
         }
 
         // GET: CampController/Delete/5
@@ -111,13 +135,13 @@ namespace Company.Controllers
                 return NotFound();
             }
 
-            var category = await db.Categories.FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            var model = await db.CampCategories.FirstOrDefaultAsync(m => m.Id == id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(model);
         }
 
         // POST: CampController/Delete/5
@@ -125,8 +149,8 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
         {
-            var Delcategory = await db.Categories.FindAsync(id);
-            db.Categories.Remove(Delcategory);
+            var DelPrice = await db.CampCategories.FindAsync(id);
+            db.CampCategories.Remove(DelPrice);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

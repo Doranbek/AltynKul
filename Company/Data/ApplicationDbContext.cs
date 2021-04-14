@@ -18,6 +18,8 @@ namespace Company.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet <Voucher> Vouchers { get; set; }
         public DbSet<ViewVoucher> ViewVouchers { get; set; }
+        public DbSet<CampCategory> CampCategories { get; set; }
+        public DbSet<ViewCampCategory> ViewCampCategories { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
