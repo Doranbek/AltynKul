@@ -1,6 +1,4 @@
-﻿using Company.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,37 +7,35 @@ using System.Threading.Tasks;
 
 namespace Company.Models
 {
-    public class VoucherVM
+    [Table(name: "ViewVouchers")]
+    public class ViewVoucher
     {
-     
+        [Key]
+        public int Id { get; set; }
 
         [Display(Name = "Ф.И.О.")]
-        [Required(ErrorMessage = "Не указан Ф.И.О")]
         public string FullName { get; set; }
 
         [Display(Name = "Поток")]
-        public int CampId { get; set; }
+        public string Camp { get; set; }
+
+        [Display(Name = "Категория")]
+        public string Category { get; set; }
 
         [Display(Name = "Номер")]
-        public int RoomId { get; set; }
-        //public Room Room { get; set; }
+        public int Number { get; set; }
 
         [Display(Name = "Цена")]
         public decimal Cost { get; set; }
 
-        [Display(Name = "Бронировать")]
+        [Display(Name = "Статус")]
         public bool Reserved { get; set; }
 
-        [Display(Name = "Оплачено")]
+        [Display(Name = "Статус оплаты")]
         public bool PayStatus { get; set; }
 
         [NotMapped]
-        
         public int ApplicationId { get; set; }
-        [NotMapped]
-        public int CategoryId { get; set; }
-
-        public IEnumerable<SelectListItem> Rooms { get; set; }
-
+      
     }
 }

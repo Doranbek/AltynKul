@@ -1,0 +1,43 @@
+﻿@model Company.Models.VoucherVM
+
+@{
+    ViewData["Title"] = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Book</h1>
+
+<h4>VoucherVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Book">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="ApplicationId" />
+                <input type="hidden" asp-for="CampId" />
+                <input type="hidden" asp-for="CategoryId" />
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomId" class="control-label">Номер</label>
+                <select asp-for="RoomId" class="form-control" asp-items="Model.Rooms"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PayStatus" /> @Html.DisplayNameFor(model => model.PayStatus)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Book" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+

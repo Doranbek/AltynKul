@@ -11,10 +11,11 @@ namespace Company.Data
         [Key]
         public int Id { get; set; }
         public string FullName { get; set; }      
-        public int CampId { get; set; }    
+        public int CampId { get; set; }
+        public int CategoryId { get; set; }
         public int RoomId { get; set; }
         public Room Room { get; set; }       
-        public decimal Price { get; set; }
+        public decimal Cost { get; set; }
         public bool Reserved { get; set; }
         public bool  PayStatus { get; set; }
         public int ApplicationId { get; set; }
