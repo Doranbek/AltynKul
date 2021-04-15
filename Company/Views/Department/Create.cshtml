@@ -1,11 +1,11 @@
 ﻿@model Company.Models.DepartmentVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создание нового отдела";
 }
 
 
-<h4>Создать новый отдел</h4>
+<h4>Создание нового отдела</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,12 +23,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Создать" class="btn btn-primary" />
+                <a class="btn btn-dark" asp-action="Index">Назад</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Назад</a>
-</div>
 

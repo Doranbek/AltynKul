@@ -1,10 +1,10 @@
 ﻿@model Company.Data.Position
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удаление должности";
 }
 
-<h1>Удалить</h1>
+<h1>Удаление должности ЖК КР</h1>
 
 <div>    
     <hr />
@@ -26,6 +26,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Назад</a>
+        <a class="btn btn-dark" asp-action="Index">Назад</a>
     </form>
 </div>
