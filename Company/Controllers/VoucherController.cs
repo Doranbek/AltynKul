@@ -25,12 +25,25 @@ namespace Company.Controllers
 
         public async Task<IActionResult> Book(int id)
         {
+            //находим модель заявку по Id
             var AppModel = await db.Applications.FindAsync(id);
+            //находим путевки который совпадает с заявкой категория номера и поток
+
             var checkRoom = await db.Vouchers
                 .FirstOrDefaultAsync(c => c.CampId == AppModel.CampId && c.CategoryId == AppModel.CategoryId);
-
-            var selectRooms = await db.Rooms
-                .Where(c => c.CategoryId == AppModel.CategoryId /*&& c.Id != checkRoom.RoomId*/).ToListAsync();
+            var selectRooms = new List<Room>();
+            // находим комнаты совпадающий по категории номеров и не занятых
+            // Выбирается номера если количество отдыхающих и место в номере совпадает
+            if (checkRoom is null)
+            {
+                selectRooms = await db.Rooms
+                .Where(c => c.CategoryId == AppModel.CategoryId && AppModel.CampersNumber == c.Amount).ToListAsync();
+            }
+            else
+            {
+                selectRooms = await db.Rooms
+                .Where(c => c.CategoryId == AppModel.CategoryId && AppModel.CampersNumber == c.Amount && c.Id != checkRoom.RoomId).ToListAsync();
+            }
 
             var roomsSelectList = new List<SelectListItem>();
             selectRooms.ForEach(
@@ -77,8 +90,8 @@ namespace Company.Controllers
             if (ModelState.IsValid)
             {
                 var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == model.RoomId);
-                //string campt = "Camp" + model.CategoryId;
-                //var cat = await db.Categories.FirstOrDefaultAsync(c => c.Id == model.CategoryId);
+                var price = await db.CampCategories
+                    .FirstOrDefaultAsync(p => p.CategoryId == model.CategoryId && p.CampId == model.CampId);
                
                 db.Vouchers.Add(new Voucher
                 {
@@ -86,7 +99,7 @@ namespace Company.Controllers
                     CampId = model.CampId,
                     CategoryId = model.CategoryId,
                     RoomId = model.RoomId,
-                    Cost = 10 * room.Amount,// 10 дней * количество мест в комнате * цена потока (Categories Camp +CampId) cost
+                    Cost = 10 * room.Amount * price.Price/2,// 10 дней * количество мест в комнате * цена потока (Categories Camp +CampId) cost
                     Reserved = true,
                     PayStatus = true,
                     ApplicationId = model.ApplicationId,
@@ -94,8 +107,11 @@ namespace Company.Controllers
 
                 });
                   await db.SaveChangesAsync();
-                //var AppModel = await db.Applications.FindAsync(model.ApplicationId);
-
+                var AppModel = await db.Applications.FindAsync(model.ApplicationId);
+                AppModel.Status = true;
+                db.Applications.Update(AppModel);
+                await db.SaveChangesAsync();
+               
                 return RedirectToAction("Index");
             }
             return View(model);

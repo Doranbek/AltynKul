@@ -21,7 +21,7 @@ namespace Company.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var modelList = await db.ViewApplications.ToListAsync();
+            var modelList = await db.ViewApplications.Where(r => r.Status == false).ToListAsync();
             return View(modelList);
         }
         public async Task<IActionResult> SortList()
