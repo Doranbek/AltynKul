@@ -6,9 +6,6 @@
 
 <h1>Полный список заявок</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -64,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                <a asp-action="Book" asp-controller="Voucher" asp-route-id="@item.Id">Забронировать</a> 
+                <a class ="btn btn-success" asp-action="Book" asp-controller="Voucher" asp-route-id="@item.Id">Забронировать</a> 
             </td>
         </tr>
 }

@@ -1,10 +1,10 @@
 ﻿@model Company.Models.CategoryVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Добавление новой категории";
 }
 
-<h1>Создание</h1>
+<h1>Добавление новой категории</h1>
 
 <hr />
 <div class="row">
@@ -23,13 +23,11 @@
             </div>
            
             <div class="form-group">
-                <input type="submit" value="Создать" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-primary" />|
+                <a class="btn btn-dark"asp-action="Index">Назад</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Назад</a>
-</div>
 

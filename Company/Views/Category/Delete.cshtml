@@ -1,19 +1,19 @@
 ﻿@model Company.Data.Category
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удаление категории номера";
 }
 
-<h1>Удалить </h1>
+<h1>Удаление категории номера</h1>
 <div>
     
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Тип номера
+            Категория номеров
         </dt>
         <dd class = "col-sm-10">
-            Описание
+            Описание категории номера
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Specification)
@@ -26,6 +26,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Назад</a>
+        <a class="btn btn-dark" asp-action="Index">Назад</a>
     </form>
 </div>
