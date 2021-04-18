@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Company.Data
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public decimal Price { get; set; }
+
     }
 }

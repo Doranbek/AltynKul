@@ -89,7 +89,9 @@ namespace Company.Controllers
                 return NotFound();
             }
 
+
             var camp = await db.CampCategories.FindAsync(id);
+
             if (camp == null)
             {
                 return NotFound();
