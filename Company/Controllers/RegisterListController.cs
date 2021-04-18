@@ -11,6 +11,7 @@ using PagedList;
 
 namespace Company.Controllers
 {
+    
     public class RegisterListController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

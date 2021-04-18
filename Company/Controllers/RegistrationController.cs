@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    //[Authorize(Roles = "ADMIN")]
+    
+    [Authorize(Roles = "register")]
     public class RegistrationController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

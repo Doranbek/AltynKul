@@ -9,7 +9,9 @@ namespace Company.Models
 {
     public class CampCategoryVM
     {
-       
+        [Required]
+        public int Id { get; set; }
+
         [Display(Name = "Поток")]
         [Required(ErrorMessage = "Поток не выбран")]
         public int CampId { get; set; }
