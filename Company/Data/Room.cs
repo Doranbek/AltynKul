@@ -10,10 +10,13 @@ namespace Company.Data
     {
         [Key]
         public int Id { get; set; }
-        public int RoomNumber{ get; set; }        
+        [Display(Name = "Номер")]
+        public int RoomNumber { get; set; }
+        [Display(Name = "Категория")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        [Display(Name = "Количество мест")]
         public int Amount { get; set; }
+        [Display(Name = "Описание")]
         public string Specification { get; set; }
 
     }

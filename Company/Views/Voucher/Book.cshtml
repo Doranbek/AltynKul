@@ -1,13 +1,12 @@
 ﻿@model Company.Models.VoucherVM
 
 @{
-    ViewData["Title"] = "Book";
+    ViewData["Title"] = "Бронирование";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Book</h1>
+<h1>Оброботка заявок</h1>
 
-<h4>VoucherVM</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -31,13 +30,14 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Book" class="btn btn-primary" />
+                <input type="submit" value="Забронировать" class="btn btn-success" />
+                <a class="btn btn-danger" asp-action="Cancel" asp-controller="Voucher" asp-route-id="@Model.ApplicationId">Свободных мест нет</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Назад</a>
+    <a class="btn btn-dark" asp-action="Index">Назад</a>
 </div>
 

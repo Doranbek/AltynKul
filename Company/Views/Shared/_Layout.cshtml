@@ -19,13 +19,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
 
-                        @*@if (User.IsInRole("RoleName"))*@
-
+                        @*@if (User.IsInRole("register") && User.IsInRole("admin"))
+                        {*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Регистрация заявок </a>
                         </li>
-
-
+                        @*}*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Список заявок</a>
                         </li>

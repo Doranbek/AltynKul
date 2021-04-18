@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Company.Controllers
 {
@@ -23,6 +25,7 @@ namespace Company.Controllers
         {
             var modelList = await db.ViewApplications.Where(r => r.Status == false).ToListAsync();
             return View(modelList);
+
         }
         public async Task<IActionResult> SortList()
         {
@@ -45,5 +48,6 @@ namespace Company.Controllers
             
             return  View(AppModel);
         }
+
     }
 }

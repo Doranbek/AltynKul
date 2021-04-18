@@ -10,7 +10,9 @@ namespace Company.Data
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; }              
-        public string Specification { get; set; }            
+        [Display(Name = "Отделы")]
+        public string Title { get; set; }
+        [Display(Name = "Описание отдела")]
+        public string Specification { get; set; }
     }
 }

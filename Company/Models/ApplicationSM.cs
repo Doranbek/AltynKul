@@ -24,8 +24,8 @@ namespace Company.Models
         [Required(ErrorMessage = "Поток не выбран")]
         public int CampId { get; set; }
 
-        [Display(Name = "Взрос­лые")]
-        [Required(ErrorMessage = "Количество взрослых не указан")]
+        [Display(Name = "Количество отдыхающих")]
+        [Required(ErrorMessage = "Количество отдыхающих не указан")]
         public int CampersNumber { get; set; }
 
         [Display(Name = "Выборать тип номера")]
