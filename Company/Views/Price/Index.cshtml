@@ -8,7 +8,7 @@
 <h1>Прайс лист потоков</h1>
 
 <p>
-    <a asp-action="Create">Установить новую цену</a>
+    <a asp-action="Create"> Добавить цену</a>
 </p>
 <table class="table">
     <thead>
@@ -38,8 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

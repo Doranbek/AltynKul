@@ -1,11 +1,11 @@
 ﻿@model Company.Models.CampCategoryVM
 
 @{
-    ViewData["Title"] = "Установка цен";
+    ViewData["Title"] = "Добавление цен";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Установка цен</h1>
+<h1>Добавление цен</h1>
 
 <hr />
 <div class="row">
@@ -20,7 +20,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label">Поток</label>
+                <label asp-for="CategoryId" class="control-label">Категория номера</label>
                 <select asp-for="CategoryId" asp-items="Model.Categories">
                     <option>Выберите поток</option>
 

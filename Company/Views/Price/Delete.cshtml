@@ -1,4 +1,4 @@
-﻿@model Company.Data.CampCategory
+﻿@model Company.Models.ViewCampCategory
 
 @{
     ViewData["Title"] = "Удаление цен";
@@ -7,20 +7,20 @@
 
 <h1>Удаление цен</h1>
 <div>
-    <h4>CampCategory</h4>
+    <h4>Вы действительно хотите удалить?</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             Поток
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CampId)
+            @Html.DisplayFor(model => model.Camp)
         </dd class>
         <dt class = "col-sm-2">
             Категория номера
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
+            @Html.DisplayFor(model => model.Category)
         </dd class>
         <dt class = "col-sm-2">
             Цена
@@ -32,7 +32,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a class="btn btn-dark"  asp-action="Index">Назад</a>
+        <input type="submit" value="Да" class="btn btn-danger" /> |
+        <a class="btn btn-light"  asp-action="Index">Нет</a>
     </form>
 </div>

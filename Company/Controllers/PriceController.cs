@@ -81,53 +81,7 @@ namespace Company.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: CampController/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-
-            var camp = await db.CampCategories.FindAsync(id);
-
-            if (camp == null)
-            {
-                return NotFound();
-            }
-            return View(camp);
-        }
-
-        // POST: CampController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CampCategory model)
-        {
-
-            if (id != model.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    db.Update(model);
-                    await db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
-
-
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
-        }
-
+       
         // GET: CampController/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -137,7 +91,7 @@ namespace Company.Controllers
                 return NotFound();
             }
 
-            var model = await db.CampCategories.FirstOrDefaultAsync(m => m.Id == id);
+            var model = await db.ViewCampCategories.FirstOrDefaultAsync(m => m.Id == id);
             if (model == null)
             {
                 return NotFound();
