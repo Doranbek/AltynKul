@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Company.Data.Enum;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,7 +29,7 @@ namespace Company.Models
         [Display(Name = "Дата подачи")]
         public DateTime? CreatedDate { get; set; }
         [Display(Name = "Статус заявки")]
-        public bool Status { get; set; }
+        public AppStatus Status { get; set; }
 
     }
 }

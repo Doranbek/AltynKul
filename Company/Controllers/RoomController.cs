@@ -1,5 +1,6 @@
 ﻿using Company.Data;
 using Company.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
+    [Authorize(Roles = "admin,operator")]
     public class RoomController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

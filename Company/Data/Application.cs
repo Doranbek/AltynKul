@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Company.Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Company.Data
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public bool Status { get; set; }
+        public AppStatus Status { get; set; }
 
     }
 }

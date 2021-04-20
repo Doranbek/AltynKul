@@ -1,5 +1,7 @@
 ﻿using Company.Data;
+using Company.Data.Enum;
 using Company.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
+    [Authorize(Roles = "admin,operator")]
     public class VoucherController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -75,15 +78,6 @@ namespace Company.Controllers
             return View(modelList);
         }
 
-
-        //// GET: VoucherController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        // POST: VoucherController/Create
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Book(VoucherVM model)
         {
@@ -99,7 +93,7 @@ namespace Company.Controllers
                     CampId = model.CampId,
                     CategoryId = model.CategoryId,
                     RoomId = model.RoomId,
-                    Cost = 10 * room.Amount * price.Price/2,// 10 дней * количество мест в комнате * цена потока (Categories Camp +CampId) cost
+                    Cost = 10 * room.Amount * price.Price/2,
                     Reserved = true,
                     PayStatus = true,
                     ApplicationId = model.ApplicationId,
@@ -108,7 +102,7 @@ namespace Company.Controllers
                 });
                   await db.SaveChangesAsync();
                 var AppModel = await db.Applications.FindAsync(model.ApplicationId);
-                AppModel.Status = true;
+                AppModel.Status = AppStatus.Завершен;
                 db.Applications.Update(AppModel);
                 await db.SaveChangesAsync();
                
@@ -158,6 +152,15 @@ namespace Company.Controllers
             {
                 return View();
             }
+        }
+        public async Task<IActionResult> Reject(int id)
+        {
+            var AppModel = await db.Applications.FindAsync(id);
+            AppModel.Status = AppStatus.Отклонено;
+            db.Applications.Update(AppModel);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }
