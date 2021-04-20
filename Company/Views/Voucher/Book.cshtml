@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Забронировать" class="btn btn-success" />
-                <a class="btn btn-danger" asp-action="Cancel" asp-controller="Voucher" asp-route-id="@Model.ApplicationId">Свободных мест нет</a>
+                <a class="btn btn-danger" asp-action="Reject" asp-controller="Voucher" asp-route-id="@Model.ApplicationId">Отказать</a>
             </div>
         </form>
     </div>

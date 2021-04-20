@@ -6,12 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PagedList.Mvc;
-using PagedList;
+using Microsoft.AspNetCore.Authorization;
+using Company.Data.Enum;
 
 namespace Company.Controllers
 {
-    
+    [Authorize]
+
     public class RegisterListController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -24,13 +25,18 @@ namespace Company.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var modelList = await db.ViewApplications.Where(r => r.Status == false).ToListAsync();
+            var modelList = await db.ViewApplications.Where(r => r.Status == AppStatus.Ожидании).ToListAsync();
             return View(modelList);
 
         }
+        public async Task<IActionResult> AppList()
+        {
+            var modelSortList = await db.ViewApplications.Where(x => x.Status == AppStatus.Отклонено).ToListAsync();
+            return View(modelSortList);
+        }
         public async Task<IActionResult> SortList()
         {
-            var modelSortList = await db.ViewApplications.Where(x => x.Status == true).ToListAsync();
+            var modelSortList = await db.ViewApplications.Where(x => x.Status == AppStatus.Завершен).ToListAsync();
             return View(modelSortList);
         }
         public async Task<IActionResult> Reserv(int? id)

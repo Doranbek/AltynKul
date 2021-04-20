@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
+    [Authorize(Roles = "admin,register,operator")]
     
-    [Authorize(Roles = "register")]
+
     public class RegistrationController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -83,7 +84,7 @@ namespace Company.Controllers
                     CampId = model.CampId,
                     CampersNumber = model.CampersNumber,
                     CategoryId = model.CategoryId,
-                    Status = false,
+                    Status = Data.Enum.AppStatus.Ожидании,
                     CreatedDate = DateTime.Now
                 });
                 var retValue = await db.SaveChangesAsync();
