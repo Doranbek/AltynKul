@@ -11,10 +11,13 @@ namespace Company.Data
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int CampId { get; set; }
         public Camp Camp { get; set; }
         public int CategoryId { get; set; }
+        [Required]
         public Category Category { get; set; }
+        [Required]
         public decimal Price { get; set; }
 
     }

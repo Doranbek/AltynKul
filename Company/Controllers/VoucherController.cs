@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,operator")]
+    [Authorize]
     public class VoucherController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -26,6 +26,7 @@ namespace Company.Controllers
             this.db = db;
         }
 
+        [Authorize(Roles = "operator")]
         public async Task<IActionResult> Book(int id)
         {
             //находим модель заявку по Id
@@ -78,6 +79,8 @@ namespace Company.Controllers
             return View(modelList);
         }
 
+        [Authorize(Roles = "operator")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Book(VoucherVM model)
         {
@@ -153,6 +156,7 @@ namespace Company.Controllers
                 return View();
             }
         }
+        [Authorize(Roles = "operator")]
         public async Task<IActionResult> Reject(int id)
         {
             var AppModel = await db.Applications.FindAsync(id);

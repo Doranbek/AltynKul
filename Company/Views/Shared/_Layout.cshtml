@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
+    <header class="alert-danger">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
@@ -25,51 +25,45 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Регистрация заявок </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Список заявок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Заявки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Список бронированных заявок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Бронированные заявки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Voucher" asp-action="Index">Список путевок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="AppList">Отклоненные заявки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Position" asp-action="Index">Должности</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Отделы</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Camp" asp-action="Index">Потоки</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Тип номеров</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Voucher" asp-action="Index">Путевки</a>
                             </li>
 
                         }
                         @if (User.IsInRole("operator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Список заявок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Заявки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Бронированные заявки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="AppList">Отклоненные заявки</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Voucher" asp-action="Index">Путевки</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Index">Номерной фонд</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Price" asp-action="Index">Цены</a>
                             </li>
 
                         }
                         @if (User.IsInRole("manager"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Список заявок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Заявки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Список бронированных заявок</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Бронированные заявки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="AppList">Отклоненные заявки</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Voucher" asp-action="Index">Путевки</a>
@@ -80,21 +74,6 @@
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Регистрация заявок </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="Index">Список заявок</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RegisterList" asp-action="SortList">Список бронированных заявок</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Price" asp-action="Index">Цены</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Voucher" asp-action="Index">Список путевок</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Position" asp-action="Index">Должности</a>
                             </li>
                             <li class="nav-item">
@@ -109,10 +88,10 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Room" asp-action="Index">Номерной фонд</a>
                             </li>
-                        }
-                      
-
-
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Price" asp-action="Index">Цены</a>
+                            </li>
+                         }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

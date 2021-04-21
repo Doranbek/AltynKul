@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Company.Data.Room>
+﻿@model IEnumerable<RoomVM>
 
 @{
     ViewData["Title"] = "Номерной фонд Пансионата";
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
+                @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)

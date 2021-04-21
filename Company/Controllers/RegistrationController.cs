@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,register,operator")]
+    [Authorize(Roles = "register")]
     
 
     public class RegistrationController : Controller

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,operator")]
+    [Authorize(Roles = "admin")]
     public class RoomController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -27,13 +27,33 @@ namespace Company.Controllers
         // GET: DepartmentController
         public async Task<IActionResult> Index()
         {
-            var list = await db.Rooms.ToListAsync();
-            return View(list);
+            //var selectCategories = await db.Categories.ToListAsync();
+            //var categoriesSelectList = new List<SelectListItem>();
+            //selectCategories.ForEach(
+            //    p =>
+            //    {
+            //        categoriesSelectList.Add(new SelectListItem() { Text = p.Title, Value = p.Id.ToString() });
+            //    });
+            //var list = await db.Rooms.ToListAsync();
+
+            var query = from room in db.Rooms
+                        join category in db.Categories on room.CategoryId equals category.Id
+                        select new RoomVM
+                        {
+                            Id = room.Id,
+                            CategoryName = category.Title,
+                            Amount = room.Amount,
+                            RoomNumber = room.RoomNumber,
+                            Specification = room.Specification
+                        };
+
+            return View(await query.ToListAsync());
         }
 
         // GET: CampController/Create
         public ActionResult Create()
-        {            
+        {
+            ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "Title");
             return View();
         }
 
@@ -67,6 +87,8 @@ namespace Company.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "Title");
 
             var room = await db.Rooms.FindAsync(id);
             if (room == null)

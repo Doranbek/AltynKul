@@ -14,6 +14,9 @@ namespace Company.Models
         public int Id { get; set; }
         [Display(Name = "Номер")]        
         public int RoomNumber { get; set; }
+        [Display(Name = "Категория Name")]
+        public string CategoryName { get; set; }
+
         [Display(Name = "Категория")]
         public int CategoryId { get; set; }
         [Display(Name = "Количество мест")]

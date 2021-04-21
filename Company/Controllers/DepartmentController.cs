@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,register")]
+    [Authorize(Roles = "admin")]
     public class DepartmentController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

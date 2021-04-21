@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,register,operator")]
+    [Authorize(Roles = "admin")]
     public class CampController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -23,32 +23,26 @@ namespace Company.Controllers
             _logger = logger;
             this.db = db;
         }
-        // GET: CampController
         public async Task<ActionResult> Index()
         {
-            var list = await db.Camps.ToListAsync();
-          
+            var list = await db.Camps.ToListAsync();          
 
             return View(list);
         }
-
-        // GET: CampController/Create
+      
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CampVM model)
         {
             if (!ModelState.IsValid) return View(model);
-
             
             var Camp = new Camp
-            {
-                
+            {                
                 Title = model.Title,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
@@ -61,8 +55,6 @@ namespace Company.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-        // GET: CampController/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,12 +70,10 @@ namespace Company.Controllers
             return View(camp);
         }
 
-        // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Camp camp)
         {
-
             if (id != camp.Id)
             {
                 return NotFound();
@@ -99,33 +89,27 @@ namespace Company.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     return NotFound();
-                }
-                              
+                }                              
                 
                 return RedirectToAction(nameof(Index));
             }
             return View(camp);
         }
 
-        // GET: CampController/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
-
             var camp = await db.Camps.FirstOrDefaultAsync(m => m.Id == id);
             if (camp == null)
             {
                 return NotFound();
             }
-
             return View(camp);
         }
 
-        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
