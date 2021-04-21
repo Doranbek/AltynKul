@@ -11,8 +11,7 @@ using Company.Data.Enum;
 
 namespace Company.Controllers
 {
-    [Authorize]
-
+    [Authorize(Roles = "operator, register, manager")]
     public class RegisterListController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

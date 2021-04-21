@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "admin,operator")]
+    [Authorize(Roles = "admin")]
     public class PriceController : Controller
     {
         protected readonly ILogger<HomeController> _logger;

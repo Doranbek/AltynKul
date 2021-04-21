@@ -17,13 +17,12 @@ namespace Company.Controllers
     {
         protected readonly ILogger<HomeController> _logger;
         protected readonly ApplicationDbContext db;
-
         public CategoryController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             this.db = db;
         }
-        // GET: DepartmentController
+        
         public async Task<IActionResult> Index()
         {
             var list = await db.Categories.ToListAsync();
@@ -31,23 +30,19 @@ namespace Company.Controllers
             return View(list);
         }
 
-        // GET: CampController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoryVM model)
         {
             if (!ModelState.IsValid) return View(model);
 
-
             var Category = new Category
             {
-
                 Title = model.Title,
                 Specification = model.Specification
             };
@@ -59,7 +54,6 @@ namespace Company.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: CampController/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,7 +69,6 @@ namespace Company.Controllers
             return View(category);
         }
 
-        // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Category category)
@@ -97,17 +90,13 @@ namespace Company.Controllers
                 {
                     return NotFound();
                 }
-
-
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
-        // GET: CampController/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
@@ -122,7 +111,6 @@ namespace Company.Controllers
             return View(category);
         }
 
-        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
