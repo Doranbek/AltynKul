@@ -7,13 +7,17 @@
 
 
 <p>
-    <a asp-action="Create">Добавить новый номер</a>
+    @if (User.IsInRole("admin"))
+    {
+        <a asp-action="Create">Добавить новый номер</a>
+    }
+    
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Номер комнаты/котеджа
+                № комнаты<br>коттеджа
             </th>
             <th>
                 Категория номера
@@ -31,7 +35,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
+                №@Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
@@ -42,9 +46,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Specification)
             </td>
+
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |                
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                @if (User.IsInRole("admin")) 
+                 {
+                    <a asp-action ="Edit" asp-route-id="@item.Id">Изменить</a>                     
+                    <a asp-action ="Delete" asp-route-id = "@item.Id" > Удалить </a>
+                 }
+               
             </td>
         </tr>
 }

@@ -11,11 +11,13 @@ namespace Company.Data
         [Key]
         public int Id { get; set; }
         [Display(Name = "Номер")]
-        [Required]
+        
         public int RoomNumber { get; set; }
         [Display(Name = "Категория")]
         [Range(1,int.MaxValue, ErrorMessage = "Выберите категорию")]
         public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Количество мест не заполнен")]
         [Display(Name = "Количество мест")]
         public int Amount { get; set; }
         [Display(Name = "Описание")]

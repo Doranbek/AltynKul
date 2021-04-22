@@ -10,8 +10,11 @@ namespace Company.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Не указан категория номера")]
         [Display(Name = "Тип номера")]
         public string Title { get; set; }
+
         [Display(Name = "Описание")]
         public string Specification { get; set; }
     }

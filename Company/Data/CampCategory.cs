@@ -17,6 +17,7 @@ namespace Company.Data
         public int CategoryId { get; set; }
         [Required]
         public Category Category { get; set; }
+        
         [Required]
         public decimal Price { get; set; }
 

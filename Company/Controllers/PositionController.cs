@@ -17,13 +17,11 @@ namespace Company.Controllers
     {
         protected readonly ILogger<HomeController> _logger;
         protected readonly ApplicationDbContext db;
-
         public PositionController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             this.db = db;
         }
-        // GET: DepartmentController
         public async Task<IActionResult> Index()
         {
             var list = await db.Positions.ToListAsync();
@@ -31,19 +29,16 @@ namespace Company.Controllers
             return View(list);
         }
 
-        // GET: CampController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PositionVM model)
         {
             if (!ModelState.IsValid) return View(model);
-
 
             var Position = new Position
             {
@@ -59,7 +54,6 @@ namespace Company.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: CampController/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,7 +69,6 @@ namespace Company.Controllers
             return View(position);
         }
 
-        // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Position position)
@@ -98,21 +91,17 @@ namespace Company.Controllers
                     return NotFound();
                 }
 
-
                 return RedirectToAction(nameof(Index));
             }
             return View(position);
         }
 
-        // GET: CampController/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
-
             var position = await db.Positions.FirstOrDefaultAsync(m => m.Id == id);
             if (position == null)
             {
@@ -122,7 +111,6 @@ namespace Company.Controllers
             return View(position);
         }
 
-        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)

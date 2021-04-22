@@ -11,18 +11,18 @@ namespace Company.Models
 {
     public class VoucherVM
     {
-     
 
         [Display(Name = "Ф.И.О.")]
         [Required(ErrorMessage = "Не указан Ф.И.О")]
         public string FullName { get; set; }
 
         [Display(Name = "Поток")]
+        [Required(ErrorMessage = "Не выбран поток")]
         public int CampId { get; set; }
 
         [Display(Name = "Номер")]
-        public int RoomId { get; set; }
-        //public Room Room { get; set; }
+        [Required(ErrorMessage = "Не выбран номер")]
+        public int RoomId { get; set; }        
 
         [Display(Name = "Цена")]
         public decimal Cost { get; set; }
@@ -33,12 +33,11 @@ namespace Company.Models
         [Display(Name = "Оплачено")]
         public bool PayStatus { get; set; }
 
-        [NotMapped]
-        
+        [NotMapped]        
         public int ApplicationId { get; set; }
+
         [NotMapped]
         public int CategoryId { get; set; }
-
         public IEnumerable<SelectListItem> Rooms { get; set; }
 
     }

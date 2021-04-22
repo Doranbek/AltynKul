@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {
-    [Authorize(Roles = "register")]
-    
-
+    [Authorize(Roles = "register")] 
     public class RegistrationController : Controller
     {
         protected readonly ILogger<HomeController> _logger;
@@ -25,14 +23,12 @@ namespace Company.Controllers
             _logger = logger;
             this.db = db;
         }
-
         public async Task<IActionResult> Registration()
         {            
             var selectDepartments = await db.Departments.ToListAsync();
             var selectPositions = await db.Positions.ToListAsync();
             var selectCamps = await db.Camps.ToListAsync();
             var selectCategories = await db.Categories.ToListAsync();
-
 
             var departmentsSelectList = new List<SelectListItem>();
             selectDepartments.ForEach(
@@ -67,7 +63,6 @@ namespace Company.Controllers
                 Categories =categoriesSelectList
 
             };
-
             return View(viewModel);
         }
 
@@ -97,7 +92,6 @@ namespace Company.Controllers
             }
             return View(model);
         }
-
 
     }
 }
