@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Company.Models
 {
     public class CampCategoryVM
-    {
-        [Required]
+    {       
         public int Id { get; set; }
 
         [Display(Name = "Поток")]
@@ -19,9 +18,9 @@ namespace Company.Models
         [Required(ErrorMessage = "Категория не выбрана")]
         public int CategoryId { get; set; }
         [Display(Name = "Цена")]
-        [Required(ErrorMessage = "Цена не указан")]
+        [Required(ErrorMessage ="Цена не заполнен")]
+        [Range(typeof(decimal), "0.01", "5000.99")]
         public decimal Price { get; set; }
-
         public IEnumerable<SelectListItem> Camps { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
     }

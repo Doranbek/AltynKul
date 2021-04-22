@@ -12,15 +12,21 @@ namespace Company.Models
         
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Номер")]        
+        [Display(Name = "Номер")]
+        [Required(ErrorMessage = "Не указан номер комнаты")]
         public int RoomNumber { get; set; }
+        
         [Display(Name = "Категория Name")]
         public string CategoryName { get; set; }
 
         [Display(Name = "Категория")]
+        [Required(ErrorMessage = "Категория не выбран")]
         public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Количество мест не заполнен")]
         [Display(Name = "Количество мест")]
         public int Amount { get; set; }
+
         [Display(Name = "Описание")]
         public string Specification { get; set; }
 

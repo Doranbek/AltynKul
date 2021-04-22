@@ -7,7 +7,6 @@ namespace Company.Models
 {
     public class ApplicationSM
     {
-
         [Display(Name = "Ф.И.О.")]
         [Required(ErrorMessage = "Не указан Ф.И.О")]
         public string FullName { get; set; }
@@ -26,18 +25,15 @@ namespace Company.Models
 
         [Display(Name = "Количество отдыхающих")]
         [Required(ErrorMessage = "Количество отдыхающих не указан")]
+        [Range(typeof(int), "1", "8")]
         public int CampersNumber { get; set; }
 
         [Display(Name = "Выборать тип номера")]
-        public int CategoryId { get; set; }
-        
+        public int CategoryId { get; set; }      
 
         public IEnumerable<SelectListItem> Departments { get; set; }
-
         public IEnumerable<SelectListItem> Positions { get; set; }
-
         public IEnumerable<SelectListItem> Camps { get; set; }
-
         public IEnumerable<SelectListItem> Categories { get; set; }        
 
     }

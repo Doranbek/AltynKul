@@ -23,6 +23,7 @@
             <div class="form-group">
                 <label asp-for="RoomId" class="control-label">Номер</label>
                 <select asp-for="RoomId" class="form-control" asp-items="Model.Rooms"></select>
+                <span asp-validation-for="RoomId" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -33,11 +34,20 @@
                 <input type="submit" value="Забронировать" class="btn btn-success" />
                 <a class="btn btn-danger" asp-action="Reject" asp-controller="Voucher" asp-route-id="@Model.ApplicationId">Отказать</a>
             </div>
+            <div>
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="text-danger" role="alert">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+            </div>
+            <div class="validation" asp-validation-summary="All"></div>
         </form>
     </div>
 </div>
 
 <div>
-    <a class="btn btn-dark" asp-action="Index">Назад</a>
+    <a class="btn btn-dark" asp-controller="RegisterList" asp-action="Index">Назад</a>
 </div>
 

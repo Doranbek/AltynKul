@@ -10,8 +10,10 @@ namespace Company.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Названия должности не указан")]
         [Display(Name = "Должность")]
         public string Title { get; set; }
+
         [Display(Name = "Описание")]
         public string Specification { get; set; }
     }

@@ -22,32 +22,27 @@ namespace Company.Controllers
         {
             _logger = logger;
             this.db = db;
-        }
-        // GET: DepartmentController
+        }        
         public async Task<IActionResult> Index()
         {
             var list = await db.Departments.ToListAsync();
 
             return View(list);
         }
-
-        // GET: CampController/Create
+       
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: CampController/Create
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DepartmentVM model)
         {
             if (!ModelState.IsValid) return View(model);
 
-
             var Department = new Department
             {
-
                 Title = model.Title,                
                 Specification = model.Specification
             };
@@ -58,8 +53,7 @@ namespace Company.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-        // GET: CampController/Edit/5
+ 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,7 +69,6 @@ namespace Company.Controllers
             return View(department);
         }
 
-        // POST: CampController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Department department)
@@ -98,13 +91,11 @@ namespace Company.Controllers
                     return NotFound();
                 }
 
-
                 return RedirectToAction(nameof(Index));
             }
             return View(department);
         }
 
-        // GET: CampController/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
 
@@ -122,7 +113,6 @@ namespace Company.Controllers
             return View(department);
         }
 
-        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)

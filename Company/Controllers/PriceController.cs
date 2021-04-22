@@ -17,13 +17,11 @@ namespace Company.Controllers
     {
         protected readonly ILogger<HomeController> _logger;
         protected readonly ApplicationDbContext db;
-
         public PriceController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             this.db = db;
         }
-        // GET: HomeController1
         public async Task<IActionResult> Index()
         {
             var list = await db.ViewCampCategories.ToListAsync();
@@ -31,8 +29,6 @@ namespace Company.Controllers
             return View(list);
         }
 
-
-        // GET: CampController/Create
         public async Task<ActionResult> Create()
         {
             var selectCamps = await db.Camps.ToListAsync();
@@ -60,7 +56,6 @@ namespace Company.Controllers
             return View(viewModel);
         }
 
-        // POST: CampController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CampCategoryVM model)
@@ -70,7 +65,6 @@ namespace Company.Controllers
 
             var price = new CampCategory
             {
-
                 CampId = model.CampId,
                 CategoryId = model.CategoryId,
                 Price = model.Price
@@ -82,9 +76,7 @@ namespace Company.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-       
-        // GET: CampController/Delete/5
+      
         public async Task<ActionResult> Delete(int? id)
         {
 
@@ -92,17 +84,14 @@ namespace Company.Controllers
             {
                 return NotFound();
             }
-
             var model = await db.ViewCampCategories.FirstOrDefaultAsync(m => m.Id == id);
             if (model == null)
             {
                 return NotFound();
             }
-
             return View(model);
         }
 
-        // POST: CampController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)

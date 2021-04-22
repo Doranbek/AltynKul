@@ -14,12 +14,15 @@ namespace Company.Models
         public int Id { get; set; }
 
         [Display(Name = "Поток")]
+        [Required(ErrorMessage = "Поток не указан")]
         public string Camp { get; set; }
 
         [Display(Name = "Категория номера")]
+        [Required]
         public string Category { get; set; }
 
         [Display(Name = "Цена")]
+        [Required]
         public decimal Price { get; set; }
     }
 }

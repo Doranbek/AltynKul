@@ -13,6 +13,7 @@ namespace Company.Data
         public string FullName { get; set; }      
         public int CampId { get; set; }
         public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Не выбран номер")]
         public int RoomId { get; set; }
         public Room Room { get; set; }       
         public decimal Cost { get; set; }

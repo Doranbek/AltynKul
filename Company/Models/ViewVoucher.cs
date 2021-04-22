@@ -16,8 +16,17 @@ namespace Company.Models
         [Display(Name = "Ф.И.О.")]
         public string FullName { get; set; }
 
+        public int CampersNumber { get; set; }
+
         [Display(Name = "Поток")]
         public string Camp { get; set; }
+        [Display(Name = "Дата начала потока")]
+        [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
+
+        [Display(Name = "Дата конца потока")]
+        [DataType(DataType.Date)]
+        public DateTime EndDate { get; set; }        
 
         [Display(Name = "Категория")]
         public string Category { get; set; }
@@ -28,14 +37,7 @@ namespace Company.Models
         [Display(Name = "Цена")]
         public decimal Cost { get; set; }
 
-        [Display(Name = "Статус")]
-        public bool Reserved { get; set; }
-
         [Display(Name = "Статус оплаты")]
-        public bool PayStatus { get; set; }
-
-        [NotMapped]
-        public int ApplicationId { get; set; }
-      
+        public bool PayStatus { get; set; }      
     }
 }

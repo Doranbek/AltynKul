@@ -21,15 +21,13 @@ namespace Company.Controllers
         {
             _logger = logger;
             this.db = db;
-        }
-        
+        }        
         public async Task<IActionResult> Index()
         {
             var list = await db.Categories.ToListAsync();
 
             return View(list);
         }
-
         public ActionResult Create()
         {
             return View();
@@ -46,7 +44,6 @@ namespace Company.Controllers
                 Title = model.Title,
                 Specification = model.Specification
             };
-
             db.Add(Category);
 
             await db.SaveChangesAsync();
@@ -60,7 +57,6 @@ namespace Company.Controllers
             {
                 return NotFound();
             }
-
             var category = await db.Categories.FindAsync(id);
             if (category == null)
             {
@@ -73,12 +69,10 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Category category)
         {
-
             if (id != category.Id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
@@ -101,7 +95,6 @@ namespace Company.Controllers
             {
                 return NotFound();
             }
-
             var category = await db.Categories.FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {

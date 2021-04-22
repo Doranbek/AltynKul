@@ -6,61 +6,72 @@
 }
 
 <h1>Список путевек</h1>
-
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FullName)
+                Ф.И.О сотрудника
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Camp)
+                Количество отдыхающих
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                 Названия потока
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Number)
+                Заезд
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cost)
+                Выезд
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Reserved)
+                Категория номера
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PayStatus)
+                Номер комнаты
             </th>
-            
+            <th>
+                Стоимость
+            </th>
+            <th>
+                Статус оплаты
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Camp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reserved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayStatus)
-            </td>
-           
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CampersNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Camp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayStatus)
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

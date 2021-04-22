@@ -10,8 +10,10 @@ namespace Company.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Отделы")]
+        [Required(ErrorMessage = "Название отдела не указан")]
+        [Display(Name = "Отдел")]
         public string Title { get; set; }
+
         [Display(Name = "Описание отдела")]
         public string Specification { get; set; }
     }

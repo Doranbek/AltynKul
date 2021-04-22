@@ -2,7 +2,6 @@
 using Company.Data.Enum;
 using Company.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,15 +28,12 @@ namespace Company.Controllers
         [Authorize(Roles = "operator")]
         public async Task<IActionResult> Book(int id)
         {
-            //находим модель заявку по Id
             var AppModel = await db.Applications.FindAsync(id);
-            //находим путевки который совпадает с заявкой категория номера и поток
 
             var checkRoom = await db.Vouchers
                 .FirstOrDefaultAsync(c => c.CampId == AppModel.CampId && c.CategoryId == AppModel.CategoryId);
             var selectRooms = new List<Room>();
-            // находим комнаты совпадающий по категории номеров и не занятых
-            // Выбирается номера если количество отдыхающих и место в номере совпадает
+
             if (checkRoom is null)
             {
                 selectRooms = await db.Rooms
@@ -60,8 +56,7 @@ namespace Company.Controllers
             }
 
             var voucher = new VoucherVM()
-            {
-               
+            {               
                 FullName = AppModel.FullName,               
                 CampId = AppModel.CampId,
                 CategoryId = AppModel.CategoryId,
@@ -72,7 +67,6 @@ namespace Company.Controllers
             return View(voucher);
         }
 
-        // GET: VoucherController
         public async Task<IActionResult> Index()
         {
             var modelList = await db.ViewVouchers.ToListAsync();
@@ -84,21 +78,21 @@ namespace Company.Controllers
         [ValidateAntiForgeryToken]
         public async Task <IActionResult> Book(VoucherVM model)
         {
-            if (ModelState.IsValid)
-            {
-                var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == model.RoomId);
+            var room = await db.Rooms.FirstOrDefaultAsync(r => r.Id == model.RoomId);
+            if (ModelState.IsValid && room is not null)
+            {                
                 var price = await db.CampCategories
                     .FirstOrDefaultAsync(p => p.CategoryId == model.CategoryId && p.CampId == model.CampId);
-               
+                
                 db.Vouchers.Add(new Voucher
                 {
                     FullName = model.FullName, 
                     CampId = model.CampId,
                     CategoryId = model.CategoryId,
                     RoomId = model.RoomId,
-                    Cost = 10 * room.Amount * price.Price/2,
+                    Cost = 10 * room.Amount * price.Price / 2,
                     Reserved = true,
-                    PayStatus = true,
+                    PayStatus = false,
                     ApplicationId = model.ApplicationId,
                     CreatedDate = DateTime.Now
 
@@ -109,53 +103,13 @@ namespace Company.Controllers
                 db.Applications.Update(AppModel);
                 await db.SaveChangesAsync();
                
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","RegisterList");
             }
+            if (room == null)
+                TempData["SuccessMessage"] = $"Нет свободных номеров";
             return View(model);
         }
-        
 
-        // GET: VoucherController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: VoucherController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: VoucherController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: VoucherController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
         [Authorize(Roles = "operator")]
         public async Task<IActionResult> Reject(int id)
         {

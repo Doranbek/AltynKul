@@ -8,8 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Company.Controllers
-{
-    
+{    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
