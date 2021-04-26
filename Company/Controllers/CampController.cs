@@ -13,16 +13,10 @@ using System.Threading.Tasks;
 namespace Company.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class CampController : Controller
+    public class CampController : BaseController
     {
-        protected readonly ILogger<HomeController> _logger;
-        protected readonly ApplicationDbContext db;
-
-        public CampController(ILogger<HomeController> logger, ApplicationDbContext db)
-        {
-            _logger = logger;
-            this.db = db;
-        }
+        public CampController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
         public async Task<ActionResult> Index()
         {
             var list = await db.Camps.ToListAsync();          

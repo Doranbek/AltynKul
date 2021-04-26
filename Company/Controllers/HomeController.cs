@@ -1,4 +1,5 @@
-﻿using Company.Models;
+﻿using Company.Data;
+using Company.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,14 +10,10 @@ using System.Threading.Tasks;
 
 namespace Company.Controllers
 {    
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
 
         public IActionResult Index()
         {

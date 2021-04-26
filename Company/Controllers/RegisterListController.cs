@@ -10,16 +10,10 @@ using Company.Data.Enum;
 namespace Company.Controllers
 {
     [Authorize(Roles = "operator, register, manager")]
-    public class RegisterListController : Controller
+    public class RegisterListController : BaseController
     {
-        protected readonly ILogger<HomeController> _logger;
-        protected readonly ApplicationDbContext db;
-
-        public RegisterListController(ILogger<HomeController> logger, ApplicationDbContext db)
-        {
-            _logger = logger;
-            this.db = db;
-        }
+        public RegisterListController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
         public async Task<IActionResult> Index()
         {
             var modelList = await db.ViewApplications.Where(r => r.Status == AppStatus.Ожидании).ToListAsync();
