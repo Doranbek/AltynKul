@@ -12,16 +12,10 @@ using System.Threading.Tasks;
 namespace Company.Controllers
 {
     [Authorize]
-    public class RoomController : Controller
+    public class RoomController : BaseController
     {
-        protected readonly ILogger<HomeController> _logger;
-        protected readonly ApplicationDbContext db;
-
-        public RoomController(ILogger<HomeController> logger, ApplicationDbContext db)
-        {
-            _logger = logger;
-            this.db = db;
-        }
+        public RoomController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
         [Authorize(Roles = "admin, operator")]
         public async Task<IActionResult> Index()
         {

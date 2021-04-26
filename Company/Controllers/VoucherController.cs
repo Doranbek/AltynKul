@@ -14,16 +14,10 @@ using System.Threading.Tasks;
 namespace Company.Controllers
 {
     [Authorize]
-    public class VoucherController : Controller
+    public class VoucherController : BaseController
     {
-        protected readonly ILogger<HomeController> _logger;
-        protected readonly ApplicationDbContext db;
-
-        public VoucherController(ILogger<HomeController> logger, ApplicationDbContext db)
-        {
-            _logger = logger;
-            this.db = db;
-        }
+       public VoucherController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
 
         [Authorize(Roles = "operator")]
         public async Task<IActionResult> Book(int id)

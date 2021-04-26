@@ -13,16 +13,10 @@ using System.Threading.Tasks;
 namespace Company.Controllers
 {
     [Authorize(Roles = "register")] 
-    public class RegistrationController : Controller
+    public class RegistrationController : BaseController
     {
-        protected readonly ILogger<HomeController> _logger;
-        protected readonly ApplicationDbContext db;
-
-        public RegistrationController(ILogger<HomeController> logger, ApplicationDbContext db)
-        {
-            _logger = logger;
-            this.db = db;
-        }
+        public RegistrationController(ILogger<HomeController> logger, ApplicationDbContext db) : base(logger, db)
+        { }
         public async Task<IActionResult> Registration()
         {            
             var selectDepartments = await db.Departments.ToListAsync();
